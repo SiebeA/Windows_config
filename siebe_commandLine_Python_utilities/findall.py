@@ -6,6 +6,9 @@ def main(pattern):
     """
     input_file = input("Enter the path to the input text file: ")
     
+    # Strip quotes from the input file path, if present
+    input_file = input_file.strip("\"'")
+
     with open(input_file, 'r', encoding="utf-8") as f:
         text = f.read()
         # enable global and multiline matching
