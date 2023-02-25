@@ -1,5 +1,9 @@
 import re
 
+# ANSI escape sequences for colorizing output
+COLOR_RED = '\033[91m'
+COLOR_RESET = '\033[0m'
+
 def main():
     """
     Find all matches for a given regex pattern in a text file
@@ -10,7 +14,7 @@ def main():
     # Prompt the user for the regex pattern to match
     pattern = input('Enter the regex pattern to match: ')
 
-    # Set the number of words to include before and after each match
+    # Set the number of characters to include before and after each match
     before = after = 1000
 
     # Prompt the user for whether the search should be case-sensitive
@@ -35,6 +39,10 @@ def main():
         start = max(0, match.start() - before)
         end = min(len(text), match.end() + after)
         context = text[start:end]
+        # Colorize the matched text within the context output
+        match_start = match.start() - start
+        match_end = match.end() - start
+        context = context[:match_start] + COLOR_RED + context[match_start:match_end] + COLOR_RESET + context[match_end:]
         matches.append((match.group(), context))
 
     # Print the matches
