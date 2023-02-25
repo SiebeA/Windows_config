@@ -1,38 +1,51 @@
 import re
 
-def main(pattern):
+def main():
     """
     Find all matches for a given regex pattern in a text file
     """
-    input_file = input("Enter the path to the input text file: ")
-    
-    # Strip quotes from the input file path, if present
-    input_file = input_file.strip("\"'")
+    # Prompt the user for the path to the input file
+    path = input('Enter the path to the input file: ').strip('"')
 
-    with open(input_file, 'r', encoding="utf-8") as f:
+    # Prompt the user for the regex pattern to match
+    pattern = input('Enter the regex pattern to match: ')
+
+    # Set the number of words to include before and after each match
+    before = after = 1000
+
+    # Prompt the user for whether the search should be case-sensitive
+    case_sensitive = input('Make the search case-sensitive? (y/n) ').lower() == 'y'
+
+    # Set the regex flags based on whether the search is case-sensitive
+    if case_sensitive:
+        flags = re.MULTILINE
+    else:
+        flags = re.IGNORECASE | re.MULTILINE
+
+    # Read the text from the input file
+    with open(path, 'r', encoding='utf-8') as f:
         text = f.read()
-        # enable global and multiline matching
-        pattern = pattern
-        regex = re.compile(pattern, re.MULTILINE)
-        matches = regex.findall(text)
-        # only print unique matches
-        matches = list(set(matches))
 
-        # export to a text file
-        with open('temp_findall.txt', 'w', encoding="utf-8") as f:
-            for match in matches:
-                start_index = text.find(match)
-                end_index = start_index + len(match)
-                context_start = max(start_index - 40, 0)
-                context_end = min(end_index + 40, len(text))
-                context = text[context_start:context_end]
-                print()
-                print("Match: ", match)
-                print("Context: ", context)
-                f.write("Match: " + match + '\n')
-                f.write("Context: " + context + '\n\n')
-            print("\nA text file with the results has been created in the same folder.\n")
+    # Compile the regex pattern with the appropriate flags
+    regex = re.compile(pattern, flags)
+
+    # Find all matches in the text and their surrounding context
+    matches = []
+    for match in regex.finditer(text):
+        start = max(0, match.start() - before)
+        end = min(len(text), match.end() + after)
+        context = text[start:end]
+        matches.append((match.group(), context))
+
+    # Print the matches
+    if len(matches) == 0:
+        print('No matches found.')
+    else:
+        print(f'{len(matches)} match(es) found:')
+        for i, (match, context) in enumerate(matches):
+            print(f'{i+1}. {match}')
+            print(f'   {context}\n')
 
 if __name__ == '__main__':
-    pattern = input("Enter the regex pattern to match: ")
-    main(pattern)
+    # Call the main function
+    main()
