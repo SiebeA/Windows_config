@@ -1,4 +1,4 @@
-
+import argparse
 import os
 import re
 
@@ -7,7 +7,6 @@ def main(extension):
     Replace spaces in filenames with underscores for a given extension.
     """
     for file in os.listdir():
-        # if file.endswith('.txt'): and filename contains a space
         extension = extension
         if file.endswith(extension) and re.search(' ', file):
             new_name = file.replace(' ', '_')
@@ -16,4 +15,14 @@ def main(extension):
             os.rename(file, new_name)
 
 if __name__ == '__main__':
-    main()
+    # Create an ArgumentParser object
+    parser = argparse.ArgumentParser()
+
+    # Add an argument to the parser
+    parser.add_argument('--extension', required=True, help='The file extension to process')
+
+    # Parse the command-line arguments
+    args = parser.parse_args()
+
+    # Call the main function with the parsed extension argument
+    main(extension=args.extension)
