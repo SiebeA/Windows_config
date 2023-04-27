@@ -1,0 +1,1 @@
+python "X:\My Drive\Engineering\Development\PY_Spanish_learning_facilitator\PY_Spanish-sentences\translate_sentences_EN-SP.py"

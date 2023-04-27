@@ -1,0 +1,1 @@
+python "X:\My Drive\Engineering\Development\PY_Spanish_learning_facilitator\Spanish-verbs-from-Gutenberg\verb_andContext_returner.py"

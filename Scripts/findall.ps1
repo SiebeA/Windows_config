@@ -1,0 +1,1 @@
+python 'X:\My Drive\Engineering\Python\custom_scripts\siebe_commandLine_Python_utilities\findall.py' # --input Schopenhauer_-_essays.txt --pattern women (this would work, but I cannot provide the arguments from the command line)

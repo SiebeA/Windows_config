@@ -11,13 +11,21 @@ drive # start drive
 # copy all .ps1 files in the C:\Users\Siebe\Documents\PowerShell folder
 # Copy-Item -Recurse -Filter "*.ps1" -path "C:\Users\Siebe\Documents\PowerShell" -destination "X:\My Drive\Programs\1. New Pc machine setup\Appdata"      # powershell # not working, also copies folders
 
-# remove all the files and folderes in the X:\My Drive\Programs\1. New Pc machine setup\Appdata\ folder:
-# Remove-Item -Recurse -Path "X:\My Drive\Programs\1. New Pc machine setup\Appdata\*" -Force    
 
+# remove all the files and folderes in the X:\My Drive\Programs\1. New Pc machine setup\Appdata\ folder:
+Remove-Item -Recurse -Path "X:\My Drive\Programs\1. New Pc machine setup\Appdata\*" -Force
 cp -Path "C:\Users\Siebe\AppData\Roaming\Everything" -Destination "X:\My Drive\Programs\1. New Pc machine setup\Appdata" -Recurse -Force # everything
-Copy-Item -Recurse -path "C:\Users\Siebe\AppData\Roaming\copyq" -destination "X:\My Drive\Programs\1. New Pc machine setup\Appdata\copyq"     # copyq
+Copy-Item -Recurse -path "C:\Users\Siebe\AppData\Roaming\copyq" -Destination "X:\My Drive\Programs\1. New Pc machine setup\Appdata\copyq"     # copyq
 # TODO leftoff only copy ps1 files, not any folders
 # alternatively remove all folders in a dir, not the files
+
+
+# ============================================
+#      Python siebe-custom-functions#
+# ============================================
+
+Remove-Item -Recurse -Path "C:\Users\Siebe\AppData\Local\Programs\Python\Python311\Lib\site-packages\siebe_customfunctions\" -Force
+cp -Recurse -Path "X:\My Drive\Engineering\Python\custom_scripts\siebe_customfunctions" -Destination "C:\Users\Siebe\AppData\Local\Programs\Python\Python311\Lib\site-packages"
 
 
 echo "pc will shut down in 15 minutes" 
