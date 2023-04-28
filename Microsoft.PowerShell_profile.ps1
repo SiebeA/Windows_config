@@ -19,7 +19,6 @@ $shell.WindowTitle = "Default"
 Import-Module PSReadLine
 Clear-Host # remove the warning message at the beginning
 
-
 # add the following paths to the $env:PSModulePath
 $env:Path += ";C:\Users\Siebe\Documents\WindowsPowerShell\Powershell_scripts_Siebe" 
 $env:Path += ";C:\Program Files\Google\Drive File Stream\67.0.2.0"                      # google drive
@@ -35,6 +34,34 @@ $env:Path += ";C:\Program Files\Google\Drive File Stream\67.0.2.0\GoogleDriveFS.
 # w32tm /config /syncfromflags:manual "/manualpeerlist:0.pool.ntp.org,0x1 1.pool.ntp.org,0x1 2.pool.ntp.org,0x1 3.pool.ntp.org,0x1" /reliable:yes
 # w32tm /config /update # not working
 
+
+
+#%===========================================================================
+#         Functions       
+# ===========================================================================
+
+function tSearch { # aka "text-file search function"
+        param(
+            [string]$FilePath,
+            [string]$SearchPattern
+        )
+    
+        Get-Content $FilePath | Select-String $SearchPattern
+    }
+
+function hSearch {
+    <#
+        aka "history search function"
+Synopsis
+    This function searches the history.txt file for a given string
+
+    #>
+    param(
+        [string]$SearchPattern
+    )
+
+    Get-Content "C:\Users\Siebe\Documents\PowerShell\history.txt" | Select-String $SearchPattern
+}
 
 
 #%===========================================================================
@@ -58,12 +85,17 @@ $env:Path += ";C:\Program Files\Google\Drive File Stream\67.0.2.0\GoogleDriveFS.
 
 ############                Set-Alias for PROJECT-MANAGEMENT
 Set-Alias -Name "aliases" -Value "X:\My Drive\Engineering\Development\SP_Project_Management\shortcuts.ps1"
+    
 Set-Alias -Name "leftoff" -Value "X:\My Drive\Engineering\Development\SP_Project_Management\leftoff_windows.ps1"
 Set-Alias -Name "gwrite" -Value "X:\My Drive\Engineering\Development\SP_Project_Management\write.ps1"
 
 ############                Set-Alias for COMMANDS
 Set-Alias -Name "rm" -value Remove-Item
 Set-Alias -Name "whereis" -value Get-Command
+
+############                Set-Alias for custom functions
+Set-Alias -Name "ts" -value tSearch
+Set-Alias -Name "hs" -value hSearch
 
 ############                Set-Alias for PROGRAMS
 Set-Alias -Name "gd" -Value GoogleDriveFS
