@@ -40,6 +40,22 @@ $env:Path += ";C:\Program Files\Google\Drive File Stream\67.0.2.0\GoogleDriveFS.
 #         Functions       
 # ===========================================================================
 
+# create a function that: Get-Content -Tail X "path/to/file.txt"
+
+function htail {
+    param(
+        [Parameter(Mandatory=$false, Position=1)]
+        [string]$FilePath = "C:\Users\Siebe\Documents\PowerShell\history.txt",
+        
+        [Parameter(Mandatory=$true, Position=0)]
+        [int]$Lines
+    )
+
+    Get-Content -Tail $Lines $FilePath
+
+}
+
+
 function tSearch { # aka "text-file search function"
         param(
             [string]$FilePath,
@@ -68,6 +84,10 @@ Synopsis
 #         Aliases       
 # ===========================================================================
 
+# aliases for 2 value commands cannot be created without an intermediate function
+Function gitFunction { Clear-Host; git status }
+Set-Alias -Name "gs" -Value gitFunction
+
 ############ Set-Alias for MISC
 # Set-Alias -Name "profile" -Value "C:\Users\Siebe\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
 
@@ -92,6 +112,8 @@ Set-Alias -Name "gwrite" -Value "X:\My Drive\Engineering\Development\SP_Project_
 ############                Set-Alias for COMMANDS
 Set-Alias -Name "rm" -value Remove-Item
 Set-Alias -Name "whereis" -value Get-Command
+
+
 
 ############                Set-Alias for custom functions
 Set-Alias -Name "ts" -value tSearch

@@ -30,7 +30,7 @@ Listen
 
 Read
 - return textverbs from Google Sheets               $ verbos
-- books: - https://play.google.com/books (spanish account)
+- books: - X:\My Drive\Engineering\Development\PY_Spanish_learning_facilitator\Spanish-verbs-from-Gutenberg
 - https://www.amazon.com/s?k=spanish+books&i=stripbooks&ref=nb_sb_noss_2
    - 6 books in 1 - Harry Potter - 
 
