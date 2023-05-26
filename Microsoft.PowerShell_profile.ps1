@@ -15,8 +15,6 @@ $shell.WindowTitle = "Default"
 # Set Default location
 # Set-Location "C:\Users\Siebe\Documents\PowerShell"
 
-# for 'ctrl-r' back search etc to work
-Import-Module PSReadLine
 Clear-Host # remove the warning message at the beginning
 
 # add the following paths to the $env:PSModulePath
@@ -27,62 +25,23 @@ $env:Path += ";C:\Users\Siebe\AppData\Local\Programs\Microsoft VS Code\Code.exe"
 # add a program to the list of programs that can be run from the command line
 $env:Path += ";C:\Program Files\Google\Drive File Stream\67.0.2.0\GoogleDriveFS.exe"    # google drive
 
-
-
 # # synchronize the time  # not working anymore, did before
 # echo "Syncing the time...`n"
 # w32tm /config /syncfromflags:manual "/manualpeerlist:0.pool.ntp.org,0x1 1.pool.ntp.org,0x1 2.pool.ntp.org,0x1 3.pool.ntp.org,0x1" /reliable:yes
 # w32tm /config /update # not working
 
 
+# ============================================
+#     Import Modules    
+# ============================================
 
-#%===========================================================================
-#         Functions       
-# ===========================================================================
-
-# create a function that: Get-Content -Tail X "path/to/file.txt"
-
-function htail {
-    param(
-        [Parameter(Mandatory=$false, Position=1)]
-        [string]$FilePath = "C:\Users\Siebe\Documents\PowerShell\history.txt",
-        
-        [Parameter(Mandatory=$true, Position=0)]
-        [int]$Lines
-    )
-
-    Get-Content -Tail $Lines $FilePath
-
-}
-
-
-function tSearch { # aka "text-file search function"
-        param(
-            [string]$FilePath,
-            [string]$SearchPattern
-        )
-    
-        Get-Content $FilePath | Select-String $SearchPattern
-    }
-
-function hSearch {
-    <#
-        aka "history search function"
-Synopsis
-    This function searches the history.txt file for a given string
-
-    #>
-    param(
-        [string]$SearchPattern
-    )
-
-    Get-Content "C:\Users\Siebe\Documents\PowerShell\history.txt" | Select-String $SearchPattern
-}
-
+Import-Module PSReadLine # for 'ctrl-r' back search etc to work
+Import-Module -Name "C:\Users\Siebe\Documents\PowerShell\Modules\ProcessModule.psm1" # includes my custom made functions
 
 #%===========================================================================
 #         Aliases       
 # ===========================================================================
+
 
 # aliases for 2 value commands cannot be created without an intermediate function
 Function gitFunction { Clear-Host; git status }
