@@ -30,6 +30,31 @@ $env:Path += ";C:\Program Files\Google\Drive File Stream\67.0.2.0\GoogleDriveFS.
 # w32tm /config /syncfromflags:manual "/manualpeerlist:0.pool.ntp.org,0x1 1.pool.ntp.org,0x1 2.pool.ntp.org,0x1 3.pool.ntp.org,0x1" /reliable:yes
 # w32tm /config /update # not working
 
+# ============================================
+#  Housekeeping ; cleaning       
+# ============================================
+# this removes the commands that contain a space, just like shell does automatically
+$filePath = "C:\Users\Siebe\Documents\PowerShell\history.txt"
+$regex = "^ .+$"
+(Get-Content -Path $filePath) | Where-Object { $_ -notmatch $regex } | Set-Content -Path $filePath
+
+
+###
+$filePath = "C:\Users\Siebe\Documents\PowerShell\history.txt"
+$lines = Get-Content -Path $filePath # read the file into an array of strings
+
+# loop through the lines and remove the duplicates
+$filteredLines = for ($i = 0; $i -lt $lines.Count; $i++) { # loop through the lines
+    $currentLine = $lines[$i] # get the current line
+    $nextLine = $lines[$i + 1]  # get the next line
+
+    if ($currentLine -ne $nextLine) {   # if the current line is different from the next line
+        $currentLine  # Add the current line to the filtered lines if it is different from the next line
+    }
+}
+
+$filteredLines | Set-Content -Path $filePath
+
 
 # ============================================
 #     Import Modules    
