@@ -11,7 +11,8 @@ cd "X:\My Drive\Engineering\Development\python-garminconnect"
 
 clear
 
-python ./example.py
+python ./garmin_automate.py
+# python ./example.py
 
 
 # while inside the example.py script:
