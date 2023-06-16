@@ -3,6 +3,20 @@
                                                                 # in powershell Double quotes are required for strings and new lines !!!
 
 
+
+
+# ============================================
+#   New commands for testing      
+# ============================================
+
+# cleaning up the history file
+(Get-Content -Path $env:USERPROFILE\Documents\PowerShell\history.txt) -replace 'alias|leftoff', '' | Set-Content -Path $env:USERPROFILE\Documents\PowerShell\history.txt # perhaps sourcing from a text file is better
+
+
+(Get-Content -Path $env:USERPROFILE\Documents\PowerShell\history.txt) -replace 'hsearch .+', '' | Set-Content -Path $env:USERPROFILE\Documents\PowerShell\history.txt
+(Get-Content -Path $env:USERPROFILE\Documents\PowerShell\history.txt) -replace '.+\#.*', '' | Set-Content -Path $env:USERPROFILE\Documents\PowerShell\history.txt
+(Get-Content -Path "c:\Users\Siebe\Documents\PowerShell\history.txt" | Where-Object { $_.Trim() -ne "" }) | Set-Content -Path "c:\Users\Siebe\Documents\PowerShell\history.txt" # replace all empty lines with ''
+
 #===========================================================================
 # Custimize the prompt                 
 # ==========================================================================
@@ -12,8 +26,9 @@ $shell.WindowTitle = "Default"
 #===========================================================================
 #  Settings           
 # ==========================================================================
-# Set Default location
 # Set-Location "C:\Users\Siebe\Documents\PowerShell"
+
+Set-PSReadlineOption -HistorySavePath "C:\Users\Siebe\Documents\PowerShell\history.txt" # saves the history of commands to a file
 
 Clear-Host # remove the warning message at the beginning
 
@@ -89,8 +104,6 @@ Set-Alias -Name "gs" -Value gitFunction
 
 ############                Set-Alias for PROJECT-MANAGEMENT
 Set-Alias -Name "aliases" -Value "X:\My Drive\Engineering\Development\SP_Project_Management\shortcuts.ps1"
-    
-Set-Alias -Name "leftoff" -Value "X:\My Drive\Engineering\Development\SP_Project_Management\leftoff_windows.ps1"
 Set-Alias -Name "gwrite" -Value "X:\My Drive\Engineering\Development\SP_Project_Management\write.ps1"
 
 ############                Set-Alias for COMMANDS
@@ -156,4 +169,9 @@ write-host "$profile " -foreground green
 
 # " -foreground blue
 
-Set-PSReadlineOption -HistorySavePath "C:\Users\Siebe\Documents\PowerShell\history.txt"
+
+
+
+
+# print the last 20 lines of the history file
+Get-Content -Path "C:\Users\Siebe\Documents\PowerShell\history.txt" | Select-Object -Last 20
