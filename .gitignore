@@ -1,2 +1,5 @@
 Modules/
 *.txt
+leftoff/todo.md
+powershell.config.json
+Microsoft.PowerShell_profile_2.ps1
