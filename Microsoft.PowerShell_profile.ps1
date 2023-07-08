@@ -1,8 +1,6 @@
 ## Requires -RunAsAdministrator              # This is how you ensure that the script is run as administrator
 
-                                                                # in powershell Double quotes are required for strings and new lines !!!
-
-
+              # in powershell Double quotes are required for strings and new lines !!!
 
 
 # ============================================
@@ -10,9 +8,7 @@
 # ============================================
 
 # cleaning up the history file
-(Get-Content -Path $env:USERPROFILE\Documents\PowerShell\history.txt) -replace 'alias|leftoff', '' | Set-Content -Path $env:USERPROFILE\Documents\PowerShell\history.txt # perhaps sourcing from a text file is better
-
-
+(Get-Content -Path $env:USERPROFILE\Documents\PowerShell\history.txt) -replace 'alias|leftoff', '' | Set-Content -Path $env:USERPROFILE\Documents\PowerShell\history.txt # deleting common commands; perhaps sourcing from a text file is better
 (Get-Content -Path $env:USERPROFILE\Documents\PowerShell\history.txt) -replace 'hsearch .+', '' | Set-Content -Path $env:USERPROFILE\Documents\PowerShell\history.txt
 (Get-Content -Path $env:USERPROFILE\Documents\PowerShell\history.txt) -replace '.+\#.*', '' | Set-Content -Path $env:USERPROFILE\Documents\PowerShell\history.txt
 (Get-Content -Path "c:\Users\Siebe\Documents\PowerShell\history.txt" | Where-Object { $_.Trim() -ne "" }) | Set-Content -Path "c:\Users\Siebe\Documents\PowerShell\history.txt" # replace all empty lines with ''
@@ -39,11 +35,6 @@ $env:Path += ";C:\Users\Siebe\AppData\Local\Programs\Microsoft VS Code\Code.exe"
 
 # add a program to the list of programs that can be run from the command line
 $env:Path += ";C:\Program Files\Google\Drive File Stream\67.0.2.0\GoogleDriveFS.exe"    # google drive
-
-# # synchronize the time  # not working anymore, did before
-# echo "Syncing the time...`n"
-# w32tm /config /syncfromflags:manual "/manualpeerlist:0.pool.ntp.org,0x1 1.pool.ntp.org,0x1 2.pool.ntp.org,0x1 3.pool.ntp.org,0x1" /reliable:yes
-# w32tm /config /update # not working
 
 # ============================================
 #  Housekeeping ; cleaning       
@@ -87,20 +78,10 @@ Import-Module -Name "C:\Users\Siebe\Documents\PowerShell\Modules\ProcessModule.p
 Function gitFunction { Clear-Host; git status }
 Set-Alias -Name "gs" -Value gitFunction
 
-############ Set-Alias for MISC
-# Set-Alias -Name "profile" -Value "C:\Users\Siebe\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
+# allow for a parameter to be passed to the function
+Function startEdge { Clear-Host; start 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' $args } # $args is the parameter that is passed to the function it is not necessary to use it
+Set-Alias -Name "edge" -Value startEdge
 
-###                     Set-Alias for information / text output
-
-# Set-Alias -Name "shortcuts" -Value "Get-Content 'C:\Users\Siebe\Documents\shortcuts_for_terminal and WIN R.txt'"
-
-# Set-Alias -Name "search" -Value Get-Content 'C:\Users\Siebe\Documents\PowerShell\history.txt') | Select-String '{}'
-
-## not working
-# function search([string]$input)
-# {
-#     Get-Content 'C:\Users\Siebe\Documents\PowerShell\history.txt' | Select-String {$input}
-# }
 
 ############                Set-Alias for PROJECT-MANAGEMENT
 Set-Alias -Name "aliases" -Value "X:\My Drive\Engineering\Development\SP_Project_Management\shortcuts.ps1"
@@ -111,10 +92,10 @@ Set-Alias -Name "rm" -value Remove-Item
 Set-Alias -Name "whereis" -value Get-Command
 
 
-
 ############                Set-Alias for custom functions
 Set-Alias -Name "ts" -value tSearch
 Set-Alias -Name "hs" -value hSearch
+Set-Alias -Name "size-appdata" -value "X:\My Drive\Engineering\Development\SP_Project_Management\output-appData-folderSize.ps1"
 
 ############                Set-Alias for PROGRAMS
 Set-Alias -Name "gd" -Value GoogleDriveFS
@@ -144,13 +125,6 @@ Set-Alias -Name "findall" -Value "C:\Users\Siebe\Documents\PowerShell\Scripts\fi
 #"     Scripts to run at startup"             
 # ===========================================================================
 
-## ask for user input
-# $request = Read-Host "Enter whether you want to see the TODO or Edit: {y}"
-
-# if ($request -eq 'y') { 
-#     code "C:\Users\Siebe\Documents\PowerShell\Leftoff\todo.md"
-# }
-
 
 
         ## start a program
@@ -161,17 +135,5 @@ Set-Alias -Name "findall" -Value "C:\Users\Siebe\Documents\PowerShell\Scripts\fi
 write-host "This script is executed from: " -nonewline
 write-host "$profile " -foreground green
 
-# write-host "
-# Expiration-date:
 
-# leftoff at:
-
-
-# " -foreground blue
-
-
-
-
-
-# print the last 20 lines of the history file
-Get-Content -Path "C:\Users\Siebe\Documents\PowerShell\history.txt" | Select-Object -Last 20
+Get-ChildItem | Sort-Object LastWriteTime -Descending # show the last edited files
