@@ -91,6 +91,7 @@ Set-Alias -Name "gwrite" -Value "X:\My Drive\Engineering\Development\SP_Project_
 Set-Alias -Name "rm" -value Remove-Item
 Set-Alias -Name "whereis" -value Get-Command
 
+# !!! NOTE THAT functions are imported from "C:\Users\Siebe\Documents\PowerShell\Modules\ProcessModule.psm1"
 
 ############                Set-Alias for custom functions
 Set-Alias -Name "ts" -value tSearch
@@ -136,4 +137,4 @@ write-host "This script is executed from: " -nonewline
 write-host "$profile " -foreground green
 
 
-Get-ChildItem | Sort-Object LastWriteTime -Descending # show the last edited files
+# Get-ChildItem | Sort-Object LastWriteTime -Descending # show the last edited files
