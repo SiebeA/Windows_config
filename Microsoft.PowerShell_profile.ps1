@@ -17,7 +17,7 @@
 # Custimize the prompt                 
 # ==========================================================================
 $shell = $Host.UI.RawUI # necessary for the next lines
-$shell.WindowTitle = "Default"
+# $shell.WindowTitle = "Default"
 
 #===========================================================================
 #  Settings           
@@ -78,14 +78,17 @@ Import-Module -Name "C:\Users\Siebe\Documents\PowerShell\Modules\ProcessModule.p
 Function gitFunction { Clear-Host; git status }
 Set-Alias -Name "gs" -Value gitFunction
 
+Function gitStat { Clear-Host; git log -3 --stat }
+Set-Alias -Name "stat" -Value gitStat
+
 # allow for a parameter to be passed to the function
 Function startEdge { Clear-Host; start 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' $args } # $args is the parameter that is passed to the function it is not necessary to use it
 Set-Alias -Name "edge" -Value startEdge
 
 
-############                Set-Alias for PROJECT-MANAGEMENT
-Set-Alias -Name "aliases" -Value "X:\My Drive\Engineering\Development\SP_Project_Management\shortcuts.ps1"
-Set-Alias -Name "gwrite" -Value "X:\My Drive\Engineering\Development\SP_Project_Management\write.ps1"
+############                Set-Alias for Atomating the boring stuff
+Set-Alias -Name "aliases" -Value "X:\My Drive\Engineering\Development\SP_automate-my-boring-stuff\Scripts-referedToIn-profile\aliases.ps1"
+Set-Alias -Name "gwrite" -Value "X:\My Drive\Engineering\Development\SP_automate-my-boring-stuff\write.ps1"
 
 ############                Set-Alias for COMMANDS
 Set-Alias -Name "rm" -value Remove-Item
@@ -96,7 +99,8 @@ Set-Alias -Name "whereis" -value Get-Command
 ############                Set-Alias for custom functions
 Set-Alias -Name "ts" -value tSearch
 Set-Alias -Name "hs" -value hSearch
-Set-Alias -Name "size-appdata" -value "X:\My Drive\Engineering\Development\SP_Project_Management\output-appData-folderSize.ps1"
+Set-Alias -Name "size-appdata" -value "X:\My Drive\Engineering\Development\SP_automate-my-boring-stuff\Scripts-referedToIn-profile\output-appData-folderSize.ps1"
+                                        
 
 ############                Set-Alias for PROGRAMS
 Set-Alias -Name "gd" -Value GoogleDriveFS
