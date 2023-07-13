@@ -9,7 +9,9 @@ def main():
     Find all matches for a given regex pattern in a text file
     """
     # Prompt the user for the path to the input file
-    path = input('Enter the path to the input file: ').strip('"')
+    path = input('Enter the path to the input file: ')
+    # strip both single and double quotes from the path
+    path = path.strip("'" + '"')
 
     # Prompt the user for the regex pattern to match
     pattern = input('Enter the regex pattern to match: ')
@@ -25,6 +27,7 @@ def main():
         flags = re.MULTILINE
     else:
         flags = re.IGNORECASE | re.MULTILINE
+
 
     # Read the text from the input file
     with open(path, 'r', encoding='utf-8') as f:
