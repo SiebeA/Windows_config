@@ -16,7 +16,7 @@
 #===========================================================================
 # Custimize the prompt                 
 # ==========================================================================
-$shell = $Host.UI.RawUI # necessary for the next lines
+# $shell = $Host.UI.RawUI # necessary for the next lines
 # $shell.WindowTitle = "Default"
 
 #===========================================================================
@@ -122,6 +122,10 @@ Set-Alias -Name "garmin" -Value "C:\Users\Siebe\Documents\PowerShell\Scripts\get
 # TODO I need to redo: problem is that I cannot provide the argument to the extension, when I'm in a differnet folder from which the script is positioned (even when it's added to the path)
 Set-Alias -Name "underscore" -Value "C:\Users\Siebe\Documents\PowerShell\Scripts\.replace_underscores_for_extension.ps1" #py
 Set-Alias -Name "findall" -Value "C:\Users\Siebe\Documents\PowerShell\Scripts\findall.ps1" #py
+
+############                Set-Alias for POWERSHELL-SCRIPTS
+Set-Alias -Name "matrix" -Value "C:\Users\Siebe\Documents\PowerShell\Scripts\matrix.ps1"
+
 ## Automated process to make a python script executionable anywhere in the terminal:
 # "python 'X:\My Drive\Engineering\Python\custom_scripts\siebe_customfunctions\EDIT.py'" | Out-File "C:\Users\Siebe\Documents\PowerShell\Scripts\EDIT.ps1"
 
@@ -140,5 +144,15 @@ Set-Alias -Name "findall" -Value "C:\Users\Siebe\Documents\PowerShell\Scripts\fi
 write-host "This script is executed from: " -nonewline
 write-host "$profile " -foreground green
 
+if ($pwd.Path -eq "X:\My Drive\Engineering\Development") {
+    Write-Host @"
+    
+▒█▀▀▄ █▀▀ ▀█░█▀ 　 █▀▄▀█ █▀▀█ █▀▀▄ █▀▀ 
+▒█░▒█ █▀▀ ░█▄█░ 　 █░▀░█ █░░█ █░░█ █▀▀ 
+▒█▄▄▀ ▀▀▀ ░░▀░░ 　 ▀░░░▀ ▀▀▀▀ ▀▀▀░ ▀▀▀
+"@ -ForegroundColor Green
+}
+
+# & "C:\Users\Siebe\Documents\PowerShell\Scripts\matrix.ps1" # start the matrix  visualization in the terminal
 
 # Get-ChildItem | Sort-Object LastWriteTime -Descending # show the last edited files
