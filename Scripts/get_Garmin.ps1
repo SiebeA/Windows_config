@@ -1,19 +1,18 @@
+& "C:\Users\Siebe\venvs\.requests\Scripts\Activate.ps1" # Activate the virtual environment that contains the modules used in the python script
 
-& "C:\Users\Siebe\venvs\.requests\Scripts\Activate.ps1" #activate the virtual environment
+# Source the configuration file for the email and password
+. .\config.ps1
 
+Set-Location "X:\My Drive\Engineering\Development\python-garminconnect"
 
-$env:EMAIL="siebealbers@hotmail.com"
-$env:PASSWORD="Bobobalto45!"
+Clear-Host
 
-# execute the Python script
-# change the dir to : X:\My Drive\Engineering\Development\python-garminconnect
-cd "X:\My Drive\Engineering\Development\python-garminconnect"
-
-clear
+# Set the environment variables from the configuration file
+$env:EMAIL = $EMAIL
+$env:PASSWORD = $PASSWORD
 
 python ./garmin_automate.py
 # python ./example.py
 
-
-# while inside the example.py script:
+# While inside the example.py script:
 # 8: get the step data for today
