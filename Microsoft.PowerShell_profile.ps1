@@ -8,7 +8,8 @@
 # ============================================
 
 # cleaning up the history file
-(Get-Content -Path $env:USERPROFILE\Documents\PowerShell\history.txt) -replace 'alias|leftoff', '' | Set-Content -Path $env:USERPROFILE\Documents\PowerShell\history.txt # deleting common commands; perhaps sourcing from a text file is better
+(Get-Content -Path $env:USERPROFILE\Documents\PowerShell\history.txt) -replace 'alias|leftoff|htail', '' | Set-Content -Path $env:USERPROFILE\Documents\PowerShell\history.txt # deleting common commands; perhaps sourcing from a text file is better
+(Get-Content -Path $env:USERPROFILE\Documents\PowerShell\history.txt) -replace '\s*clear', '' | Set-Content -Path $env:USERPROFILE\Documents\PowerShell\history.txt # deleting common commands; perhaps sourcing from a text file is better
 (Get-Content -Path $env:USERPROFILE\Documents\PowerShell\history.txt) -replace 'hsearch .+', '' | Set-Content -Path $env:USERPROFILE\Documents\PowerShell\history.txt
 (Get-Content -Path $env:USERPROFILE\Documents\PowerShell\history.txt) -replace '.+\#.*', '' | Set-Content -Path $env:USERPROFILE\Documents\PowerShell\history.txt
 (Get-Content -Path "c:\Users\Siebe\Documents\PowerShell\history.txt" | Where-Object { $_.Trim() -ne "" }) | Set-Content -Path "c:\Users\Siebe\Documents\PowerShell\history.txt" # replace all empty lines with ''
@@ -82,7 +83,7 @@ Function gitStat { Clear-Host; git log -3 --stat }
 Set-Alias -Name "stat" -Value gitStat
 
 # allow for a parameter to be passed to the function
-Function startEdge { Clear-Host; start 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' $args } # $args is the parameter that is passed to the function it is not necessary to use it
+Function startEdge { Clear-Host; Start-Process 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' $args } # $args is the parameter that is passed to the function it is not necessary to use it
 Set-Alias -Name "edge" -Value startEdge
 
 
@@ -115,7 +116,7 @@ Set-Alias -Name "spanish" -Value "C:\Users\Siebe\Documents\PowerShell\Scripts\sp
 ############                Set-Alias for PYTHON-SCRIPTS
 # howto: create a ps1 file that runs the python script, and add that to the path
 Set-Alias -Name "verbos" -Value "C:\Users\Siebe\Documents\PowerShell\Scripts\verbos.ps1"  #py
-Set-Alias -Name "translate" -Value "C:\Users\Siebe\Documents\PowerShell\Scripts\.translate.ps1" #py
+Set-Alias -Name "translate" -Value "C:\Users\Siebe\Documents\PowerShell\Scripts\.translate.ps1" #py # requires python dependencies: spacy, pandas, siebe_customfunctions; if the latter does not exist plaste it in the venv: C:\Users\Siebe\venvs\.nlp\Lib\site-packages
 
 Set-Alias -Name "garmin" -Value "C:\Users\Siebe\Documents\PowerShell\Scripts\get_Garmin.ps1" #py
 
@@ -151,8 +152,14 @@ if ($pwd.Path -eq "X:\My Drive\Engineering\Development") {
 ▒█░▒█ █▀▀ ░█▄█░ 　 █░▀░█ █░░█ █░░█ █▀▀ 
 ▒█▄▄▀ ▀▀▀ ░░▀░░ 　 ▀░░░▀ ▀▀▀▀ ▀▀▀░ ▀▀▀
 "@ -ForegroundColor Green
+    Get-ChildItem | Sort-Object LastWriteTime -Descending # show the last edited files
+
+    Write-Host "
+    
+    \n TODO:
+
+
+                    ad last git commit lines from history to here" -ForegroundColor Blue
 }
 
 # & "C:\Users\Siebe\Documents\PowerShell\Scripts\matrix.ps1" # start the matrix  visualization in the terminal
-
-# Get-ChildItem | Sort-Object LastWriteTime -Descending # show the last edited files

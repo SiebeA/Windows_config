@@ -11,8 +11,7 @@ Clear-Host
 $env:EMAIL = $EMAIL
 $env:PASSWORD = $PASSWORD
 
+# ============================================
+# Run the python script      
+# ============================================
 python ./garmin_automate.py
-# python ./example.py
-
-# While inside the example.py script:
-# 8: get the step data for today
