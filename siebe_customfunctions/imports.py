@@ -25,6 +25,7 @@ def keys_to_dataframe_by1stLetter(keys):
     return df
 
 def read_excel_file(file_path, sheet_name):
+    import pandas as pd
     """
     This function will read an excel file and return a dataframe.
     """
